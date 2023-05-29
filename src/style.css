@@ -1,0 +1,147 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+#header {
+	font-size: 2.6em;
+	color: #eeeeee;
+	background-color: #222831;
+	display: flex;
+	align-items: center;
+	padding: 1rem 2rem;
+}
+
+#header > span {
+	color: #00adb5;
+}
+
+#content {
+	flex: 1;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+}
+
+#menu {
+	background-color: #393e46;
+	color: #eeeeee;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+#menu > div {
+	font-size: 1.3em;
+}
+
+#task-container {
+	padding: 2rem;
+	background-color: #eeeeee;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+}
+
+#task-grid {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	gap: 1rem;
+}
+
+#task-grid > h1 {
+	color: #222831;
+	background-color: #09cece;
+	padding: 1rem;
+}
+
+.task {
+	font-size: 1.2em;
+}
+
+#newTaskForm {
+	width: 80%;
+	background-color: #dbdada;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 1rem 0.5rem;
+	box-sizing: border-box;
+	visibility: hidden;
+}
+
+#newTaskForm > h3 {
+	text-align: center;
+}
+
+#newTaskButtons {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+	justify-content: center;
+	gap: 1rem;
+}
+
+#newTaskButtons > button {
+	width: 5rem;
+	height: 1.5rem;
+	border: 0;
+	border-radius: 4px;
+}
+
+.add {
+	background-color: rgb(4, 234, 31);
+}
+
+.add:hover {
+	background-color: rgb(3, 212, 28);
+	cursor: pointer;
+}
+
+.cancel:last-child {
+	background-color: rgb(228, 104, 104);
+}
+
+.cancel:hover {
+	background-color: rgb(209, 96, 96);
+	cursor: pointer;
+}
+
+form > div {
+	display: flex;
+	flex-direction: column;
+}
+
+#newTaskForm input {
+	padding: 0.2rem;
+}
+
+textarea {
+	resize: none;
+	padding: 0.2rem;
+}
+
+#add-task {
+	position: fixed;
+	bottom: 10%;
+	right: 10%;
+	height: 4rem;
+	width: 4rem;
+	font-size: 1.5em;
+	border-radius: 50%;
+	background-color: #09cece;
+	border: 0;
+}
+
+#add-task:hover {
+	background-color: #0ab8b8;
+	cursor: pointer;
+}

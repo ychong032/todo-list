@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Much.ado</title>
+		<script src="main.js" defer></script>
+	</head>
+	<body>
+		<div id="header">Much <span>.</span>ado</div>
+		<div id="content">
+			<div id="menu">
+				<div>All Tasks</div>
+				<div>Today</div>
+				<div>Upcoming</div>
+				<div>Completed</div>
+			</div>
+			<div id="task-container">
+				<div id="task-grid">
+					<h1>All Tasks</h1>
+					<div class="task">Test task 1</div>
+				</div>
+				<form action="javascript:void(0);" id="newTaskForm">
+					<h3>New Task</h3>
+					<div>
+						<label for="title">Title:</label>
+						<input
+							type="text"
+							id="title"
+							placeholder="What do I need to do?"
+							required
+							maxlength="30"
+						/>
+					</div>
+					<div>
+						<label for="description">Description:</label>
+						<textarea
+							name="description"
+							id="description"
+							cols="30"
+							rows="3"
+							placeholder="Any additional explanation or details?"
+						></textarea>
+					</div>
+					<div>
+						<label for="dueDate">Due Date:</label>
+						<input type="date" name="dueDate" id="dueDate" />
+					</div>
+					<div>
+						<label for="priority">Priority:</label>
+						<input
+							type="number"
+							name="priority"
+							id="priority"
+							required
+							min="1"
+							max="3"
+							step="1"
+							placeholder="On a scale of 1 to 3, how important is this?"
+						/>
+					</div>
+					<div id="newTaskButtons">
+						<button class="add">Add</button>
+						<button class="cancel">Cancel</button>
+					</div>
+				</form>
+				<button id="add-task">+</button>
+			</div>
+		</div>
+	</body>
+</html>
