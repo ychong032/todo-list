@@ -54,28 +54,55 @@ body {
 	display: flex;
 	flex-direction: column;
 	width: 80%;
-	gap: 1rem;
 }
 
 #task-grid > h1 {
 	color: #222831;
 	background-color: #09cece;
 	padding: 1rem;
+	margin-bottom: 1rem;
 }
 
 .task {
 	font-size: 1.2em;
+	display: flex;
+	flex-direction: column;
+}
+
+.task-header {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid grey;
+	padding: 0.5rem;
+}
+
+.task-header:hover {
+	cursor: pointer;
+	background-color: lightgrey;
+}
+
+.expand-task,
+.task-title {
+	pointer-events: none;
+}
+
+.task-details {
+	padding: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	border: 1px solid grey;
+	margin-bottom: 0.5rem;
 }
 
 #newTaskForm {
 	width: 80%;
 	background-color: #dbdada;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	gap: 0.5rem;
 	padding: 1rem 0.5rem;
 	box-sizing: border-box;
-	visibility: hidden;
 }
 
 #newTaskForm > h3 {
