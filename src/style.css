@@ -81,9 +81,15 @@ body {
 	background-color: lightgrey;
 }
 
-.expand-task,
-.task-title {
+.task-header-content {
+	display: grid;
+	grid-template-columns: 1rem auto;
+	column-gap: 0.5rem;
 	pointer-events: none;
+}
+
+.expand-task {
+	align-self: center;
 }
 
 .task-details {

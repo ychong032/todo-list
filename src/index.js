@@ -49,6 +49,7 @@ function addNewTask() {
 	const newTaskElement = createNewTaskElement(
 		newTask.title,
 		newTask.description,
+		newTask.dueDate,
 		newTask.priority
 	);
 
@@ -57,7 +58,7 @@ function addNewTask() {
 	hideNewTaskForm();
 }
 
-function createNewTaskElement(title, description, priority) {
+function createNewTaskElement(title, description, dueDate, priority) {
 	const newTaskElement = document.createElement("div");
 	newTaskElement.classList.add("task");
 
@@ -65,9 +66,23 @@ function createNewTaskElement(title, description, priority) {
 	newTaskHeader.classList.add("task-header");
 	newTaskHeader.addEventListener("click", toggleDetails);
 
+	const newTaskHeaderContent = document.createElement("div");
+	newTaskHeaderContent.classList.add("task-header-content");
+
+	const newTaskCheckbox = document.createElement("input");
+	newTaskCheckbox.setAttribute("type", "checkbox");
+
 	const newTaskTitle = document.createElement("div");
 	newTaskTitle.classList.add("task-title");
 	newTaskTitle.textContent = title;
+
+	const emptyDiv = document.createElement("div");
+
+	const newTaskDate = document.createElement("div");
+	newTaskDate.classList.add("task-date");
+	newTaskDate.textContent = dueDate
+		? `Due: ${format(dueDate, "dd MMMM yyyy")}`
+		: "";
 
 	const newTaskExpand = document.createElement("div");
 	newTaskExpand.classList.add("expand-task");
@@ -105,7 +120,12 @@ function createNewTaskElement(title, description, priority) {
 	newTaskDetails.appendChild(newTaskDescription);
 	newTaskDetails.appendChild(newTaskPriority);
 
-	newTaskHeader.appendChild(newTaskTitle);
+	newTaskHeaderContent.appendChild(newTaskCheckbox);
+	newTaskHeaderContent.appendChild(newTaskTitle);
+	newTaskHeaderContent.appendChild(emptyDiv);
+	newTaskHeaderContent.appendChild(newTaskDate);
+
+	newTaskHeader.appendChild(newTaskHeaderContent);
 	newTaskHeader.appendChild(newTaskExpand);
 
 	newTaskElement.appendChild(newTaskHeader);
