@@ -115,6 +115,7 @@ export class DOMHandler {
 		newTaskElement.appendChild(newTaskDetails);
 
 		taskGrid.appendChild(newTaskElement);
+
 		this.hideNewTaskForm();
 	}
 
@@ -128,5 +129,15 @@ export class DOMHandler {
 			const expandTask = e.target.lastChild;
 			expandTask.textContent = expandTask.textContent === "+" ? "-" : "+";
 		}
+	}
+
+	changeTextContent(element, newText) {
+		element.textContent = newText;
+	}
+
+	toggleAddTaskButton(currentTab) {
+		const newTaskButton = document.querySelector("#add-task");
+		newTaskButton.style.display =
+			currentTab.id === "all-tasks" ? "block" : "none";
 	}
 }

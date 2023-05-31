@@ -1,9 +1,9 @@
-export class Storage {
-	constructor() {
-		this.allTodos = [];
-		this.todayTodos = [];
-		this.upcomingTodos = [];
-		this.completedTodos = [];
-		this.projects = [];
-	}
-}
+export const Storage = () => {
+	const all = [];
+	const today = [];
+	const upcoming = [];
+	const completed = [];
+	const projects = [];
+
+	return { "all-tasks": all, today, upcoming, completed, projects };
+};
