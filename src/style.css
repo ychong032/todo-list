@@ -183,3 +183,11 @@ textarea {
 	background-color: #0ab8b8;
 	cursor: pointer;
 }
+
+#footer {
+	display: flex;
+	justify-content: center;
+	background-color: #222831;
+	color: #eeeeee;
+	padding: 0.5rem;
+}
