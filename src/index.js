@@ -1,152 +1,44 @@
 import "./style.css";
-import { format, parse } from "date-fns";
 import { Todo } from "./todo";
+import { Storage } from "./storage";
+import { DOMHandler } from "./dom";
 
-// Arrays to store each list of Todo objects
-const allTodos = [];
-const todayTodos = [];
-const upcomingTodos = [];
-const completedTodos = [];
+const storage = new Storage();
+const domHandler = new DOMHandler();
 
-const newTaskButton = document.querySelector("#add-task");
-newTaskButton.addEventListener("click", showNewTaskForm);
+initialise();
 
-const cancelNewTaskButton = document.querySelector("#newTaskButtons > .cancel");
-cancelNewTaskButton.addEventListener("click", hideNewTaskForm);
+function initialise() {
+	const newTaskButton = document.querySelector("#add-task");
+	newTaskButton.addEventListener("click", domHandler.showNewTaskForm);
 
-const newTaskForm = document.querySelector("#newTaskForm");
-newTaskForm.addEventListener("submit", addNewTask);
+	const cancelNewTaskButton = document.querySelector(
+		"#newTaskButtons > .cancel"
+	);
+	cancelNewTaskButton.addEventListener("click", domHandler.hideNewTaskForm);
 
-setMinDate();
+	const newTaskForm = document.querySelector("#newTaskForm");
+	newTaskForm.addEventListener("submit", addNewTask);
 
-function showNewTaskForm() {
-	newTaskForm.style.display = "flex";
-	newTaskButton.style.display = "none";
-}
-
-function hideNewTaskForm() {
-	newTaskForm.reset();
-	newTaskForm.style.display = "none";
-	newTaskButton.style.display = "block";
+	domHandler.setMinDate();
 }
 
 function addNewTask() {
-	let taskGrid = document.querySelector("#task-grid");
-	let titleElement = document.querySelector("#title");
-	let descriptionElement = document.querySelector("#description");
-	let dueDateElement = document.querySelector("#dueDate");
-	let priorityElement = document.querySelector("#priority");
+	const newTaskValues = domHandler.getNewTaskValues();
 
 	let newTask = new Todo(
-		titleElement.value,
-		descriptionElement.value,
-		dueDateElement.value,
-		priorityElement.value
+		newTaskValues.title,
+		newTaskValues.description,
+		newTaskValues.dueDate,
+		newTaskValues.priority
 	);
-	allTodos.push(newTask);
-	console.log(allTodos);
+	storage.allTodos.push(newTask);
+	console.log(storage.allTodos);
 
-	const newTaskElement = createNewTaskElement(
+	domHandler.createNewTaskElement(
 		newTask.title,
 		newTask.description,
 		newTask.dueDate,
 		newTask.priority
 	);
-
-	taskGrid.appendChild(newTaskElement);
-
-	hideNewTaskForm();
-}
-
-function createNewTaskElement(title, description, dueDate, priority) {
-	const newTaskElement = document.createElement("div");
-	newTaskElement.classList.add("task");
-
-	const newTaskHeader = document.createElement("div");
-	newTaskHeader.classList.add("task-header");
-	newTaskHeader.addEventListener("click", toggleDetails);
-
-	const newTaskHeaderContent = document.createElement("div");
-	newTaskHeaderContent.classList.add("task-header-content");
-
-	const newTaskCheckbox = document.createElement("input");
-	newTaskCheckbox.setAttribute("type", "checkbox");
-
-	const newTaskTitle = document.createElement("div");
-	newTaskTitle.classList.add("task-title");
-	newTaskTitle.textContent = title;
-
-	const emptyDiv = document.createElement("div");
-
-	const newTaskDate = document.createElement("div");
-	newTaskDate.classList.add("task-date");
-	newTaskDate.textContent = dueDate
-		? `Due: ${format(dueDate, "dd MMMM yyyy")}`
-		: "";
-
-	const newTaskExpand = document.createElement("div");
-	newTaskExpand.classList.add("expand-task");
-	newTaskExpand.textContent = "+";
-
-	const newTaskDetails = document.createElement("div");
-	newTaskDetails.classList.add("task-details");
-	newTaskDetails.style.display = "none";
-
-	const newTaskDescription = document.createElement("div");
-	newTaskDescription.classList.add("description");
-
-	const newTaskDescriptionHeader = document.createElement("h4");
-	newTaskDescriptionHeader.textContent = "Description";
-
-	const newTaskDescriptionText = document.createElement("p");
-	newTaskDescriptionText.textContent =
-		description === "" ? "(no description provided)" : description;
-
-	const newTaskPriority = document.createElement("div");
-	newTaskPriority.classList.add("priority");
-
-	const newTaskPriorityHeader = document.createElement("h4");
-	newTaskPriorityHeader.textContent = "Priority";
-
-	const newTaskPriorityText = document.createElement("p");
-	newTaskPriorityText.textContent = priority;
-
-	newTaskPriority.appendChild(newTaskPriorityHeader);
-	newTaskPriority.appendChild(newTaskPriorityText);
-
-	newTaskDescription.appendChild(newTaskDescriptionHeader);
-	newTaskDescription.appendChild(newTaskDescriptionText);
-
-	newTaskDetails.appendChild(newTaskDescription);
-	newTaskDetails.appendChild(newTaskPriority);
-
-	newTaskHeaderContent.appendChild(newTaskCheckbox);
-	newTaskHeaderContent.appendChild(newTaskTitle);
-	newTaskHeaderContent.appendChild(emptyDiv);
-	newTaskHeaderContent.appendChild(newTaskDate);
-
-	newTaskHeader.appendChild(newTaskHeaderContent);
-	newTaskHeader.appendChild(newTaskExpand);
-
-	newTaskElement.appendChild(newTaskHeader);
-	newTaskElement.appendChild(newTaskDetails);
-
-	return newTaskElement;
-}
-
-function toggleDetails(e) {
-	console.log(e);
-
-	const taskDetails = e.target.nextSibling;
-	taskDetails.style.display =
-		taskDetails.style.display === "none" ? "flex" : "none";
-
-	const expandTask = e.target.lastChild;
-	expandTask.textContent = expandTask.textContent === "+" ? "-" : "+";
-}
-
-function setMinDate() {
-	const minDate = format(new Date(), "yyyy-MM-dd");
-	const dueDateElement = document.querySelector("#dueDate");
-	dueDateElement.min = minDate;
 }

@@ -88,8 +88,13 @@ body {
 	pointer-events: none;
 }
 
+input[type="checkbox"] {
+	pointer-events: all;
+}
+
 .expand-task {
 	align-self: center;
+	pointer-events: none;
 }
 
 .task-details {
